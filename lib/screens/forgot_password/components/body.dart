@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/components/custom_surfix_icon.dart';
-import 'package:shop_app/components/default_button.dart';
-import 'package:shop_app/components/form_error.dart';
-import 'package:shop_app/components/no_account_text.dart';
-import 'package:shop_app/size_config.dart';
+import 'package:helpme/Screens/login/components/custom_surfix_icon.dart';
+import 'package:helpme/Screens/login/components/form_error.dart';
+import 'package:helpme/Screens/login/components/no_account_text.dart';
+import 'package:helpme/components/default_button.dart';
+import 'package:helpme/components/size_config.dart';
 
 import '../../../constants.dart';
 
@@ -49,7 +49,7 @@ class ForgotPassForm extends StatefulWidget {
 class _ForgotPassFormState extends State<ForgotPassForm> {
   final _formKey = GlobalKey<FormState>();
   List<String> errors = [];
-  String email;
+  String phone;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -58,29 +58,29 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
         children: [
           TextFormField(
             keyboardType: TextInputType.emailAddress,
-            onSaved: (newValue) => email = newValue,
+            onSaved: (newValue) => phone = newValue,
             onChanged: (value) {
-              if (value.isNotEmpty && errors.contains(kEmailNullError)) {
+              if (value.isNotEmpty && errors.contains(kPhoneNullError)) {
                 setState(() {
-                  errors.remove(kEmailNullError);
+                  errors.remove(kPhoneNullError);
                 });
-              } else if (emailValidatorRegExp.hasMatch(value) &&
-                  errors.contains(kInvalidEmailError)) {
+              } else if (phoneValidatorRegExp.hasMatch(value) &&
+                  errors.contains(kInvalidPhoneError)) {
                 setState(() {
-                  errors.remove(kInvalidEmailError);
+                  errors.remove(kInvalidPhoneError);
                 });
               }
               return null;
             },
             validator: (value) {
-              if (value.isEmpty && !errors.contains(kEmailNullError)) {
+              if (value.isEmpty && !errors.contains(kPhoneNullError)) {
                 setState(() {
-                  errors.add(kEmailNullError);
+                  errors.add(kPhoneNullError);
                 });
-              } else if (!emailValidatorRegExp.hasMatch(value) &&
-                  !errors.contains(kInvalidEmailError)) {
+              } else if (!phoneValidatorRegExp.hasMatch(value) &&
+                  !errors.contains(kInvalidPhoneError)) {
                 setState(() {
-                  errors.add(kInvalidEmailError);
+                  errors.add(kInvalidPhoneError);
                 });
               }
               return null;
@@ -98,7 +98,6 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
           FormError(errors: errors),
           SizedBox(height: SizeConfig.screenHeight * 0.1),
           DefaultButton(
-            height: 56,
             text: "Continue",
             press: () {
               if (_formKey.currentState.validate()) {

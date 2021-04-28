@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/screens/cart/cart_screen.dart';
-import 'package:shop_app/screens/list_favorite/list_favorite_screen.dart';
-import 'package:shop_app/screens/list_followed/list_follow_screen.dart';
+import 'package:helpme/components/size_config.dart';
 
-import '../../../size_config.dart';
 import 'icon_btn_with_counter.dart';
 import 'search_field.dart';
 
@@ -22,15 +19,9 @@ class HomeHeader extends StatelessWidget {
         children: [
           SearchField(),
           IconBtnWithCounter(
-            svgSrc: "assets/icons/lovef.svg",
-            press: () =>
-                Navigator.pushNamed(context, ListFavoriteScreen.routeName),
-          ),
-          IconBtnWithCounter(
-            svgSrc: "assets/icons/shopf.svg",
-            // numOfitem: 3,
-            press: () =>
-                Navigator.pushNamed(context, ListFollowScreen.routeName),
+            svgSrc: "assets/icons/Bell.svg",
+            numOfitem: 3,
+            press: () {},
           ),
         ],
       ),

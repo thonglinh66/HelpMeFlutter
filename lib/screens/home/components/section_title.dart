@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-
-import '../../../size_config.dart';
+import 'package:helpme/components/size_config.dart';
 
 class SectionTitle extends StatelessWidget {
-  SectionTitle({
+  const SectionTitle({
     Key key,
     @required this.title,
     @required this.press,
-    @required this.icon,
   }) : super(key: key);
 
   final String title;
   final GestureTapCallback press;
-  IconData icon = Icons.arrow_right;
 
   @override
   Widget build(BuildContext context) {
@@ -26,22 +23,13 @@ class SectionTitle extends StatelessWidget {
             color: Colors.black,
           ),
         ),
-        Row(
-          children: [
-            GestureDetector(
-              onTap: press,
-              child: Text(
-                "See More",
-                style: TextStyle(color: Color(0xFFBBBBBB)),
-              ),
-            ),
-            Icon(
-              icon,
-              color: Color(0xFFBBBBBB),
-              size: 30.0,
-            ),
-          ],
-        )
+        GestureDetector(
+          onTap: press,
+          child: Text(
+            "Xem thêm",
+            style: TextStyle(color: Color(0xFFBBBBBB)),
+          ),
+        ),
       ],
     );
   }

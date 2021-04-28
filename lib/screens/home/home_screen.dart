@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/components/coustom_bottom_nav_bar.dart';
-import 'package:shop_app/enums.dart';
-
-import '../../size_config.dart';
-import 'components/body.dart';
+import 'package:helpme/Screens/Home/components/body_home.dart';
+import 'package:helpme/components/coustom_bottom_nav_bar.dart';
+import 'package:helpme/components/enums.dart';
+import 'package:helpme/components/size_config.dart';
 
 class HomeScreen extends StatelessWidget {
-  static String routeName = "/home";
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return Scaffold(
-      body: Body(),
+      body: HomeBody(),
       bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.home),
     );
   }

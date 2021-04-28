@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../constants.dart';
+import 'package:helpme/constants.dart';
 
 class ProcessDialog {
   static ProcessDialog _instance = new ProcessDialog.internal();

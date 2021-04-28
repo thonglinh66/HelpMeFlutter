@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:helpme/components/size_config.dart';
+import 'package:helpme/constants.dart';
 
-import '../../../constants.dart';
-import '../../../size_config.dart';
-
-class SearchField extends StatelessWidget {
+class SearchField extends StatefulWidget {
   const SearchField({
     Key key,
   }) : super(key: key);
+  @override
+  _SearchFieldState createState() => _SearchFieldState();
+}
 
+class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: SizeConfig.screenWidth * 0.6,
+      width: SizeConfig.screenWidth * 0.72,
       decoration: BoxDecoration(
-        color: kSecondaryColor.withOpacity(0.1),
+        color: kPrimaryColor.withOpacity(0.1),
         borderRadius: BorderRadius.circular(15),
       ),
       child: TextField(
-        onChanged: (value) => print(value),
+        onChanged: (value) {
+          setState(() {});
+        },
         decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(
                 horizontal: getProportionateScreenWidth(20),
@@ -25,7 +30,7 @@ class SearchField extends StatelessWidget {
             border: InputBorder.none,
             focusedBorder: InputBorder.none,
             enabledBorder: InputBorder.none,
-            hintText: "Tìm kiếm sản phẩm",
+            hintText: "Search product",
             prefixIcon: Icon(Icons.search)),
       ),
     );

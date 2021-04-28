@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop_app/screens/cart/cart_screen.dart';
-import 'package:shop_app/screens/home/home_screen.dart';
-import 'package:shop_app/screens/profile/profile_screen.dart';
-import 'package:shop_app/screens/products/products_screen.dart';
+import 'package:helpme/Screens/Home/home_screen.dart';
+import 'package:helpme/Screens/List/list_search.dart';
+import 'package:helpme/Screens/Profile_Service/components/profile_body.dart';
+import 'package:helpme/Screens/Profile_Service/profile_screen.dart';
+import 'package:helpme/Screens/Profile_User/profile_screen.dart';
+import 'package:helpme/Screens/Profile_User_Service/components/profile_body.dart';
+import 'package:helpme/Screens/Profile_User_Service/profile_screen.dart';
+import 'package:helpme/Screens/Setting/setting_screen.dart';
+import 'package:helpme/components/enums.dart';
+import 'package:helpme/model/service.dart';
+import 'package:helpme/model/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants.dart';
-import '../enums.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({
@@ -15,7 +22,6 @@ class CustomBottomNavBar extends StatelessWidget {
   }) : super(key: key);
 
   final MenuState selectedMenu;
-  final page = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +34,7 @@ class CustomBottomNavBar extends StatelessWidget {
           BoxShadow(
             offset: Offset(0, -15),
             blurRadius: 20,
-            color: Color(0xFFDADADA).withOpacity(0.15),
+            color: Color(0xFF333030).withOpacity(0.15),
           ),
         ],
         borderRadius: BorderRadius.only(
@@ -37,53 +43,80 @@ class CustomBottomNavBar extends StatelessWidget {
         ),
       ),
       child: SafeArea(
-        top: false,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: SvgPicture.asset(
-                "assets/icons/Shop Icon.svg",
-                color: MenuState.home == selectedMenu
-                    ? kPrimaryColor
-                    : inActiveIconColor,
+          top: false,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                icon: SvgPicture.asset(
+                  "assets/icons/home.svg",
+                  color: MenuState.home == selectedMenu
+                      ? kPrimaryColor
+                      : inActiveIconColor,
+                ),
+                iconSize: 11,
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                ),
               ),
-              onPressed: () =>
-                  Navigator.pushNamed(context, HomeScreen.routeName),
-            ),
-            IconButton(
-              icon: SvgPicture.asset(
-                "assets/icons/shopping.svg",
-                color: MenuState.favourite == selectedMenu
-                    ? kPrimaryColor
-                    : inActiveIconColor,
+              IconButton(
+                icon: SvgPicture.asset(
+                  "assets/icons/list.svg",
+                  color: MenuState.list == selectedMenu
+                      ? kPrimaryColor
+                      : inActiveIconColor,
+                ),
+                iconSize: 11,
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ListScreens()),
+                ),
               ),
-              onPressed: () =>
-                  Navigator.pushNamed(context, ProductScreen.routeName),
-            ),
-            IconButton(
-              icon: SvgPicture.asset(
-                "assets/icons/Cart Icon.svg",
-                color: MenuState.cart == selectedMenu
-                    ? kPrimaryColor
-                    : inActiveIconColor,
+              IconButton(
+                icon: SvgPicture.asset(
+                  "assets/icons/manager.svg",
+                  color: MenuState.profile == selectedMenu
+                      ? kPrimaryColor
+                      : inActiveIconColor,
+                ),
+                iconSize: 11,
+                onPressed: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  var status = prefs.getString('type');
+                  print(status);
+                  if (status == '0') {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UserProfileScreen()),
+                    );
+                  } else if (status == '1') {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UserProfileScreenService()),
+                    );
+                  }
+                },
               ),
-              onPressed: () =>
-                  Navigator.pushNamed(context, CartScreen.routeName),
-            ),
-            IconButton(
-              icon: SvgPicture.asset(
-                "assets/icons/User Icon.svg",
-                color: MenuState.profile == selectedMenu
-                    ? kPrimaryColor
-                    : inActiveIconColor,
-              ),
-              onPressed: () =>
-                  Navigator.pushNamed(context, ProfileScreen.routeName),
-            ),
-          ],
-        ),
-      ),
+              IconButton(
+                  icon: SvgPicture.asset(
+                    "assets/icons/settings.svg",
+                    color: MenuState.setting == selectedMenu
+                        ? kPrimaryColor
+                        : inActiveIconColor,
+                  ),
+                  iconSize: 11,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SettingScreen()),
+                    );
+                  }),
+            ],
+          )),
     );
   }
 }
